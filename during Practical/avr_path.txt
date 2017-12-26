@@ -1,0 +1,5 @@
+Target Device - -mmcu=atmega8 -B "$(PackRepoDir)\atmel\ATmega_DFP\1.0.90\gcc\dev\atmega8"
+
+C:\WinAVR-20100110\avr\include
+C:\WinAVR-20100110\lib\gcc\avr\4.3.3\include
+C:\WinAVR-20100110\lib\gcc\avr\4.3.3\include-fixed

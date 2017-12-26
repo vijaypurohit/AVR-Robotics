@@ -1,0 +1,601 @@
+
+program_for_swarn_robot_Atmega8.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000002e6  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .debug_aranges 00000020  00000000  00000000  0000033a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  2 .debug_pubnames 00000024  00000000  00000000  0000035a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  3 .debug_info   000002dd  00000000  00000000  0000037e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_abbrev 000000fa  00000000  00000000  0000065b  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_line   000002cf  00000000  00000000  00000755  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_frame  00000030  00000000  00000000  00000a24  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_str    00000158  00000000  00000000  00000a54  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_loc    00000120  00000000  00000000  00000bac  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	12 c0       	rjmp	.+36     	; 0x26 <__ctors_end>
+   2:	2c c0       	rjmp	.+88     	; 0x5c <__bad_interrupt>
+   4:	2b c0       	rjmp	.+86     	; 0x5c <__bad_interrupt>
+   6:	2a c0       	rjmp	.+84     	; 0x5c <__bad_interrupt>
+   8:	29 c0       	rjmp	.+82     	; 0x5c <__bad_interrupt>
+   a:	28 c0       	rjmp	.+80     	; 0x5c <__bad_interrupt>
+   c:	27 c0       	rjmp	.+78     	; 0x5c <__bad_interrupt>
+   e:	26 c0       	rjmp	.+76     	; 0x5c <__bad_interrupt>
+  10:	25 c0       	rjmp	.+74     	; 0x5c <__bad_interrupt>
+  12:	24 c0       	rjmp	.+72     	; 0x5c <__bad_interrupt>
+  14:	23 c0       	rjmp	.+70     	; 0x5c <__bad_interrupt>
+  16:	22 c0       	rjmp	.+68     	; 0x5c <__bad_interrupt>
+  18:	21 c0       	rjmp	.+66     	; 0x5c <__bad_interrupt>
+  1a:	20 c0       	rjmp	.+64     	; 0x5c <__bad_interrupt>
+  1c:	1f c0       	rjmp	.+62     	; 0x5c <__bad_interrupt>
+  1e:	1e c0       	rjmp	.+60     	; 0x5c <__bad_interrupt>
+  20:	1d c0       	rjmp	.+58     	; 0x5c <__bad_interrupt>
+  22:	1c c0       	rjmp	.+56     	; 0x5c <__bad_interrupt>
+  24:	1b c0       	rjmp	.+54     	; 0x5c <__bad_interrupt>
+
+00000026 <__ctors_end>:
+  26:	11 24       	eor	r1, r1
+  28:	1f be       	out	0x3f, r1	; 63
+  2a:	cf e5       	ldi	r28, 0x5F	; 95
+  2c:	d4 e0       	ldi	r29, 0x04	; 4
+  2e:	de bf       	out	0x3e, r29	; 62
+  30:	cd bf       	out	0x3d, r28	; 61
+
+00000032 <__do_copy_data>:
+  32:	10 e0       	ldi	r17, 0x00	; 0
+  34:	a0 e6       	ldi	r26, 0x60	; 96
+  36:	b0 e0       	ldi	r27, 0x00	; 0
+  38:	e6 ee       	ldi	r30, 0xE6	; 230
+  3a:	f2 e0       	ldi	r31, 0x02	; 2
+  3c:	02 c0       	rjmp	.+4      	; 0x42 <.do_copy_data_start>
+
+0000003e <.do_copy_data_loop>:
+  3e:	05 90       	lpm	r0, Z+
+  40:	0d 92       	st	X+, r0
+
+00000042 <.do_copy_data_start>:
+  42:	a0 36       	cpi	r26, 0x60	; 96
+  44:	b1 07       	cpc	r27, r17
+  46:	d9 f7       	brne	.-10     	; 0x3e <.do_copy_data_loop>
+
+00000048 <__do_clear_bss>:
+  48:	10 e0       	ldi	r17, 0x00	; 0
+  4a:	a0 e6       	ldi	r26, 0x60	; 96
+  4c:	b0 e0       	ldi	r27, 0x00	; 0
+  4e:	01 c0       	rjmp	.+2      	; 0x52 <.do_clear_bss_start>
+
+00000050 <.do_clear_bss_loop>:
+  50:	1d 92       	st	X+, r1
+
+00000052 <.do_clear_bss_start>:
+  52:	a0 36       	cpi	r26, 0x60	; 96
+  54:	b1 07       	cpc	r27, r17
+  56:	e1 f7       	brne	.-8      	; 0x50 <.do_clear_bss_loop>
+  58:	07 d0       	rcall	.+14     	; 0x68 <main>
+  5a:	43 c1       	rjmp	.+646    	; 0x2e2 <_exit>
+
+0000005c <__bad_interrupt>:
+  5c:	d1 cf       	rjmp	.-94     	; 0x0 <__vectors>
+
+0000005e <wait>:
+    milliseconds can be achieved.
+ */
+void
+_delay_loop_2(uint16_t __count)
+{
+	__asm__ volatile (
+  5e:	80 e0       	ldi	r24, 0x00	; 0
+  60:	90 e0       	ldi	r25, 0x00	; 0
+  62:	01 97       	sbiw	r24, 0x01	; 1
+  64:	f1 f7       	brne	.-4      	; 0x62 <wait+0x4>
+void wait()   
+{
+uint8_t i;
+for(i=0;i<1;i++)          // delay function
+_delay_loop_2(0);
+}
+  66:	08 95       	ret
+
+00000068 <main>:
+
+/*-------------program for swarm robots/ Synchronized Robots------------*/
+
+
+void main()
+{
+  68:	5f 92       	push	r5
+  6a:	6f 92       	push	r6
+  6c:	7f 92       	push	r7
+  6e:	8f 92       	push	r8
+  70:	9f 92       	push	r9
+  72:	af 92       	push	r10
+  74:	bf 92       	push	r11
+  76:	cf 92       	push	r12
+  78:	df 92       	push	r13
+  7a:	ef 92       	push	r14
+  7c:	ff 92       	push	r15
+  7e:	0f 93       	push	r16
+  80:	1f 93       	push	r17
+  82:	cf 93       	push	r28
+  84:	df 93       	push	r29
+   
+   DDRB=0b11111111;   //Motor Output port for mother robot; only PB0, PB1, PB2 and PB3 are used
+  86:	8f ef       	ldi	r24, 0xFF	; 255
+  88:	87 bb       	out	0x17, r24	; 23
+   DDRD=0b11001111;   //PD4 and PD5 are sensor input pins comming from baby Robot; 
+  8a:	8f ec       	ldi	r24, 0xCF	; 207
+  8c:	81 bb       	out	0x11, r24	; 17
+   DDRC=0b0000000;    //sensor Input port for Mother robot only PC4 and PC5 are used
+  8e:	14 ba       	out	0x14, r1	; 20
+int baby_status=0, mother_status=1;               // Mother status variable
+int baby_left_sensor=0, baby_right_sensor=0;      // baby sensor variable
+int mother_left_sensor=0, mother_right_sensor=0;  // mother sensor variable
+int state=0,finish=0;
+
+PORTD=0b00001111;
+  90:	8f e0       	ldi	r24, 0x0F	; 15
+  92:	82 bb       	out	0x12, r24	; 18
+  94:	a1 e0       	ldi	r26, 0x01	; 1
+  96:	ea 2e       	mov	r14, r26
+  98:	f1 2c       	mov	r15, r1
+  9a:	a0 e0       	ldi	r26, 0x00	; 0
+  9c:	b0 e0       	ldi	r27, 0x00	; 0
+  9e:	66 24       	eor	r6, r6
+  a0:	77 24       	eor	r7, r7
+  a2:	aa 24       	eor	r10, r10
+  a4:	bb 24       	eor	r11, r11
+{
+
+PORTD=0b00000000;     //same as previous if loop
+baby_status=0;
+mother_status=1;
+PORTB=0b00001001;     // move straight
+  a6:	f9 e0       	ldi	r31, 0x09	; 9
+  a8:	9f 2e       	mov	r9, r31
+}
+
+if((baby_left_sensor==0b0010000)&(baby_right_sensor==0b0000000)) //if both sensors "on"
+{
+
+PORTD=0b00001000;       // turn right
+  aa:	e8 e0       	ldi	r30, 0x08	; 8
+  ac:	8e 2e       	mov	r8, r30
+
+PORTD=0b00000001;       // turn left
+
+}
+
+if((baby_left_sensor==0b0010000)&(baby_right_sensor==0b0000000)) //if both sensors "on"
+  ae:	55 24       	eor	r5, r5
+  b0:	53 94       	inc	r5
+int baby_status=0, mother_status=1;               // Mother status variable
+int baby_left_sensor=0, baby_right_sensor=0;      // baby sensor variable
+int mother_left_sensor=0, mother_right_sensor=0;  // mother sensor variable
+int state=0,finish=0;
+
+PORTD=0b00001111;
+  b2:	cc 24       	eor	r12, r12
+  b4:	dd 24       	eor	r13, r13
+
+
+while(1)              // infinite loop
+{
+
+mother_left_sensor=PINC&0b0010000;    // mask bit 4 i.e 5th bit from right
+  b6:	83 b3       	in	r24, 0x13	; 19
+  b8:	e8 2f       	mov	r30, r24
+  ba:	f0 e0       	ldi	r31, 0x00	; 0
+  bc:	e0 71       	andi	r30, 0x10	; 16
+  be:	f0 70       	andi	r31, 0x00	; 0
+mother_right_sensor=PINC&0b0100000;   // mask bit 5 i.e 6th bit from right
+  c0:	83 b3       	in	r24, 0x13	; 19
+  c2:	68 2f       	mov	r22, r24
+  c4:	70 e0       	ldi	r23, 0x00	; 0
+  c6:	60 72       	andi	r22, 0x20	; 32
+  c8:	70 70       	andi	r23, 0x00	; 0
+
+baby_left_sensor=PIND&0b00010000;     // mask bit 4 i.e 5th bit from right
+  ca:	80 b3       	in	r24, 0x10	; 16
+  cc:	c8 2f       	mov	r28, r24
+  ce:	d0 e0       	ldi	r29, 0x00	; 0
+  d0:	c0 71       	andi	r28, 0x10	; 16
+  d2:	d0 70       	andi	r29, 0x00	; 0
+baby_right_sensor=PIND&0b00100000;    // mask bit 5 i.e 6th bit from right
+  d4:	80 b3       	in	r24, 0x10	; 16
+  d6:	08 2f       	mov	r16, r24
+  d8:	10 e0       	ldi	r17, 0x00	; 0
+  da:	00 72       	andi	r16, 0x20	; 32
+  dc:	10 70       	andi	r17, 0x00	; 0
+
+if(!finish) {                         // run untill not finish
+  de:	61 14       	cp	r6, r1
+  e0:	71 04       	cpc	r7, r1
+  e2:	49 f7       	brne	.-46     	; 0xb6 <main+0x4e>
+if(mother_status==1)
+  e4:	81 e0       	ldi	r24, 0x01	; 1
+  e6:	e8 16       	cp	r14, r24
+  e8:	f1 04       	cpc	r15, r1
+  ea:	09 f0       	breq	.+2      	; 0xee <main+0x86>
+  ec:	8c c0       	rjmp	.+280    	; 0x206 <main+0x19e>
+{
+
+if((mother_left_sensor==0b0010000)&(mother_right_sensor==0b0100000))      //if both sensors "on"
+  ee:	80 e0       	ldi	r24, 0x00	; 0
+  f0:	e0 31       	cpi	r30, 0x10	; 16
+  f2:	f1 05       	cpc	r31, r1
+  f4:	09 f4       	brne	.+2      	; 0xf8 <main+0x90>
+  f6:	81 e0       	ldi	r24, 0x01	; 1
+  f8:	90 e0       	ldi	r25, 0x00	; 0
+  fa:	60 32       	cpi	r22, 0x20	; 32
+  fc:	71 05       	cpc	r23, r1
+  fe:	09 f4       	brne	.+2      	; 0x102 <main+0x9a>
+ 100:	91 e0       	ldi	r25, 0x01	; 1
+ 102:	88 23       	and	r24, r24
+ 104:	11 f0       	breq	.+4      	; 0x10a <main+0xa2>
+ 106:	91 11       	cpse	r25, r1
+{
+
+PORTB=0b00001001;      // move straight
+ 108:	98 ba       	out	0x18, r9	; 24
+
+}
+
+if((mother_left_sensor==0b0000000)&(mother_right_sensor==0b0100000))      //if left sensor is "off"
+ 10a:	20 e0       	ldi	r18, 0x00	; 0
+ 10c:	30 97       	sbiw	r30, 0x00	; 0
+ 10e:	19 f4       	brne	.+6      	; 0x116 <main+0xae>
+ 110:	21 e0       	ldi	r18, 0x01	; 1
+ 112:	91 11       	cpse	r25, r1
+{
+
+PORTB=0b00000001;      // turn left
+ 114:	58 ba       	out	0x18, r5	; 24
+
+}
+
+if((mother_left_sensor==0b0010000)&(mother_right_sensor==0b0000000))     //if right sensor is "off"
+ 116:	90 e0       	ldi	r25, 0x00	; 0
+ 118:	61 15       	cp	r22, r1
+ 11a:	71 05       	cpc	r23, r1
+ 11c:	09 f4       	brne	.+2      	; 0x120 <main+0xb8>
+ 11e:	91 e0       	ldi	r25, 0x01	; 1
+ 120:	88 23       	and	r24, r24
+ 122:	11 f0       	breq	.+4      	; 0x128 <main+0xc0>
+ 124:	91 11       	cpse	r25, r1
+{
+
+PORTB=0b00001000;      // turn right
+ 126:	88 ba       	out	0x18, r8	; 24
+
+}
+
+if((mother_left_sensor==0b0000000)&(mother_right_sensor==0b0000000)&state==0) //if both sensors "off"
+ 128:	29 23       	and	r18, r25
+ 12a:	30 e0       	ldi	r19, 0x00	; 0
+ 12c:	40 e0       	ldi	r20, 0x00	; 0
+ 12e:	50 e0       	ldi	r21, 0x00	; 0
+ 130:	10 97       	sbiw	r26, 0x00	; 0
+ 132:	11 f4       	brne	.+4      	; 0x138 <main+0xd0>
+ 134:	41 e0       	ldi	r20, 0x01	; 1
+ 136:	50 e0       	ldi	r21, 0x00	; 0
+ 138:	24 23       	and	r18, r20
+ 13a:	35 23       	and	r19, r21
+ 13c:	23 2b       	or	r18, r19
+ 13e:	a1 f0       	breq	.+40     	; 0x168 <main+0x100>
+{
+
+PORTB=0b00000000;      //stop mother robot
+ 140:	18 ba       	out	0x18, r1	; 24
+mother_status=0;       // set mother status to 0
+baby_status=1;         //enable baby robot by setting baby status to 1
+PORTD=0b00001001;      // move baby robot straight for 100 miliseconds so that it shift itself slightly to overcome both sensor off condition
+ 142:	92 ba       	out	0x12, r9	; 18
+ 144:	c5 01       	movw	r24, r10
+ 146:	01 97       	sbiw	r24, 0x01	; 1
+ 148:	f1 f7       	brne	.-4      	; 0x146 <main+0xde>
+ 14a:	71 e0       	ldi	r23, 0x01	; 1
+ 14c:	c7 2e       	mov	r12, r23
+ 14e:	d1 2c       	mov	r13, r1
+ 150:	ee 24       	eor	r14, r14
+ 152:	ff 24       	eor	r15, r15
+ 154:	cf e7       	ldi	r28, 0x7F	; 127
+ 156:	d0 e0       	ldi	r29, 0x00	; 0
+ 158:	0f e7       	ldi	r16, 0x7F	; 127
+ 15a:	10 e0       	ldi	r17, 0x00	; 0
+ 15c:	ef e7       	ldi	r30, 0x7F	; 127
+ 15e:	f0 e0       	ldi	r31, 0x00	; 0
+ 160:	6f e7       	ldi	r22, 0x7F	; 127
+ 162:	70 e0       	ldi	r23, 0x00	; 0
+ 164:	a1 e0       	ldi	r26, 0x01	; 1
+ 166:	b0 e0       	ldi	r27, 0x00	; 0
+baby_right_sensor=127; 
+
+}
+
+
+if((mother_left_sensor==0b0000000)&(mother_right_sensor==0b0000000)&state==2) //if both sensors "on"
+ 168:	90 e0       	ldi	r25, 0x00	; 0
+ 16a:	30 97       	sbiw	r30, 0x00	; 0
+ 16c:	09 f4       	brne	.+2      	; 0x170 <main+0x108>
+ 16e:	91 e0       	ldi	r25, 0x01	; 1
+ 170:	20 e0       	ldi	r18, 0x00	; 0
+ 172:	61 15       	cp	r22, r1
+ 174:	71 05       	cpc	r23, r1
+ 176:	09 f4       	brne	.+2      	; 0x17a <main+0x112>
+ 178:	21 e0       	ldi	r18, 0x01	; 1
+ 17a:	92 23       	and	r25, r18
+ 17c:	29 2f       	mov	r18, r25
+ 17e:	30 e0       	ldi	r19, 0x00	; 0
+ 180:	40 e0       	ldi	r20, 0x00	; 0
+ 182:	50 e0       	ldi	r21, 0x00	; 0
+ 184:	a2 30       	cpi	r26, 0x02	; 2
+ 186:	b1 05       	cpc	r27, r1
+ 188:	11 f4       	brne	.+4      	; 0x18e <main+0x126>
+ 18a:	41 e0       	ldi	r20, 0x01	; 1
+ 18c:	50 e0       	ldi	r21, 0x00	; 0
+ 18e:	24 23       	and	r18, r20
+ 190:	35 23       	and	r19, r21
+ 192:	23 2b       	or	r18, r19
+ 194:	a1 f0       	breq	.+40     	; 0x1be <main+0x156>
+{
+
+PORTB=0b00000000; //stop
+ 196:	18 ba       	out	0x18, r1	; 24
+mother_status=0;  // same as described in privious if loop
+baby_status=1;
+PORTD=0b00001001; // move straight baby robot to overcome both sensor off condition
+ 198:	92 ba       	out	0x12, r9	; 18
+ 19a:	c5 01       	movw	r24, r10
+ 19c:	01 97       	sbiw	r24, 0x01	; 1
+ 19e:	f1 f7       	brne	.-4      	; 0x19c <main+0x134>
+ 1a0:	61 e0       	ldi	r22, 0x01	; 1
+ 1a2:	c6 2e       	mov	r12, r22
+ 1a4:	d1 2c       	mov	r13, r1
+ 1a6:	ee 24       	eor	r14, r14
+ 1a8:	ff 24       	eor	r15, r15
+ 1aa:	cf e7       	ldi	r28, 0x7F	; 127
+ 1ac:	d0 e0       	ldi	r29, 0x00	; 0
+ 1ae:	0f e7       	ldi	r16, 0x7F	; 127
+ 1b0:	10 e0       	ldi	r17, 0x00	; 0
+ 1b2:	ef e7       	ldi	r30, 0x7F	; 127
+ 1b4:	f0 e0       	ldi	r31, 0x00	; 0
+ 1b6:	6f e7       	ldi	r22, 0x7F	; 127
+ 1b8:	70 e0       	ldi	r23, 0x00	; 0
+ 1ba:	a3 e0       	ldi	r26, 0x03	; 3
+ 1bc:	b0 e0       	ldi	r27, 0x00	; 0
+baby_left_sensor=127; 
+baby_right_sensor=127; 
+
+}
+
+if((mother_left_sensor==0b0000000)&(mother_right_sensor==0b0000000)&state==4) //if both sensors "on"
+ 1be:	90 e0       	ldi	r25, 0x00	; 0
+ 1c0:	ef 2b       	or	r30, r31
+ 1c2:	09 f4       	brne	.+2      	; 0x1c6 <main+0x15e>
+ 1c4:	91 e0       	ldi	r25, 0x01	; 1
+ 1c6:	20 e0       	ldi	r18, 0x00	; 0
+ 1c8:	67 2b       	or	r22, r23
+ 1ca:	09 f4       	brne	.+2      	; 0x1ce <main+0x166>
+ 1cc:	21 e0       	ldi	r18, 0x01	; 1
+ 1ce:	92 23       	and	r25, r18
+ 1d0:	29 2f       	mov	r18, r25
+ 1d2:	30 e0       	ldi	r19, 0x00	; 0
+ 1d4:	40 e0       	ldi	r20, 0x00	; 0
+ 1d6:	50 e0       	ldi	r21, 0x00	; 0
+ 1d8:	a4 30       	cpi	r26, 0x04	; 4
+ 1da:	b1 05       	cpc	r27, r1
+ 1dc:	11 f4       	brne	.+4      	; 0x1e2 <main+0x17a>
+ 1de:	41 e0       	ldi	r20, 0x01	; 1
+ 1e0:	50 e0       	ldi	r21, 0x00	; 0
+ 1e2:	24 23       	and	r18, r20
+ 1e4:	35 23       	and	r19, r21
+ 1e6:	23 2b       	or	r18, r19
+ 1e8:	71 f0       	breq	.+28     	; 0x206 <main+0x19e>
+{
+
+PORTB=0b00000000;  //stop
+ 1ea:	18 ba       	out	0x18, r1	; 24
+mother_status=0;
+baby_status=1;
+PORTD=0b00001001;  // move straight
+ 1ec:	92 ba       	out	0x12, r9	; 18
+ 1ee:	c5 01       	movw	r24, r10
+ 1f0:	01 97       	sbiw	r24, 0x01	; 1
+ 1f2:	f1 f7       	brne	.-4      	; 0x1f0 <main+0x188>
+ 1f4:	ee 24       	eor	r14, r14
+ 1f6:	ff 24       	eor	r15, r15
+ 1f8:	cf e7       	ldi	r28, 0x7F	; 127
+ 1fa:	d0 e0       	ldi	r29, 0x00	; 0
+ 1fc:	0f e7       	ldi	r16, 0x7F	; 127
+ 1fe:	10 e0       	ldi	r17, 0x00	; 0
+ 200:	a5 e0       	ldi	r26, 0x05	; 5
+ 202:	b0 e0       	ldi	r27, 0x00	; 0
+ 204:	05 c0       	rjmp	.+10     	; 0x210 <main+0x1a8>
+
+
+}    // mother if closed
+
+
+if(baby_status==1)
+ 206:	81 e0       	ldi	r24, 0x01	; 1
+ 208:	c8 16       	cp	r12, r24
+ 20a:	d1 04       	cpc	r13, r1
+ 20c:	09 f0       	breq	.+2      	; 0x210 <main+0x1a8>
+ 20e:	53 cf       	rjmp	.-346    	; 0xb6 <main+0x4e>
+{
+
+if((baby_left_sensor==0b0010000)&(baby_right_sensor==0b0100000))        //if both sensors "on"
+ 210:	80 e0       	ldi	r24, 0x00	; 0
+ 212:	c0 31       	cpi	r28, 0x10	; 16
+ 214:	d1 05       	cpc	r29, r1
+ 216:	09 f4       	brne	.+2      	; 0x21a <main+0x1b2>
+ 218:	81 e0       	ldi	r24, 0x01	; 1
+ 21a:	90 e0       	ldi	r25, 0x00	; 0
+ 21c:	00 32       	cpi	r16, 0x20	; 32
+ 21e:	11 05       	cpc	r17, r1
+ 220:	09 f4       	brne	.+2      	; 0x224 <main+0x1bc>
+ 222:	91 e0       	ldi	r25, 0x01	; 1
+ 224:	88 23       	and	r24, r24
+ 226:	11 f0       	breq	.+4      	; 0x22c <main+0x1c4>
+ 228:	91 11       	cpse	r25, r1
+{
+
+PORTD=0b00001001;       // move straight
+ 22a:	92 ba       	out	0x12, r9	; 18
+
+}
+
+if((baby_left_sensor==0b0000000)&(baby_right_sensor==0b0100000))        //if both sensors "on"
+ 22c:	20 e0       	ldi	r18, 0x00	; 0
+ 22e:	cd 2b       	or	r28, r29
+ 230:	19 f4       	brne	.+6      	; 0x238 <main+0x1d0>
+ 232:	21 e0       	ldi	r18, 0x01	; 1
+ 234:	91 11       	cpse	r25, r1
+{
+
+PORTD=0b00000001;       // turn left
+ 236:	52 ba       	out	0x12, r5	; 18
+
+}
+
+if((baby_left_sensor==0b0010000)&(baby_right_sensor==0b0000000)) //if both sensors "on"
+ 238:	90 e0       	ldi	r25, 0x00	; 0
+ 23a:	01 2b       	or	r16, r17
+ 23c:	09 f4       	brne	.+2      	; 0x240 <main+0x1d8>
+ 23e:	91 e0       	ldi	r25, 0x01	; 1
+ 240:	88 23       	and	r24, r24
+ 242:	11 f0       	breq	.+4      	; 0x248 <main+0x1e0>
+ 244:	91 11       	cpse	r25, r1
+{
+
+PORTD=0b00001000;       // turn right
+ 246:	82 ba       	out	0x12, r8	; 18
+
+}
+
+if((baby_left_sensor==0b0000000)&(baby_right_sensor==0b0000000)&(state==1)) //if both sensors "on"
+ 248:	29 23       	and	r18, r25
+ 24a:	30 e0       	ldi	r19, 0x00	; 0
+ 24c:	80 e0       	ldi	r24, 0x00	; 0
+ 24e:	90 e0       	ldi	r25, 0x00	; 0
+ 250:	a1 30       	cpi	r26, 0x01	; 1
+ 252:	b1 05       	cpc	r27, r1
+ 254:	11 f4       	brne	.+4      	; 0x25a <main+0x1f2>
+ 256:	81 e0       	ldi	r24, 0x01	; 1
+ 258:	90 e0       	ldi	r25, 0x00	; 0
+ 25a:	82 23       	and	r24, r18
+ 25c:	93 23       	and	r25, r19
+ 25e:	89 2b       	or	r24, r25
+ 260:	21 f4       	brne	.+8      	; 0x26a <main+0x202>
+ 262:	51 e0       	ldi	r21, 0x01	; 1
+ 264:	c5 2e       	mov	r12, r21
+ 266:	d1 2c       	mov	r13, r1
+ 268:	0c c0       	rjmp	.+24     	; 0x282 <main+0x21a>
+{
+
+PORTD=0b00000000;    //stop baby robot
+ 26a:	12 ba       	out	0x12, r1	; 18
+baby_status=0;       // set baby status to 0
+mother_status=1;     // set mother status to 1
+PORTB=0b00001001;    // move Mother robot straight for few miliseconds so that it shifts itself slightly to overcome both sensor off condition
+ 26c:	98 ba       	out	0x18, r9	; 24
+ 26e:	c5 01       	movw	r24, r10
+ 270:	01 97       	sbiw	r24, 0x01	; 1
+ 272:	f1 f7       	brne	.-4      	; 0x270 <main+0x208>
+ 274:	cc 24       	eor	r12, r12
+ 276:	dd 24       	eor	r13, r13
+ 278:	41 e0       	ldi	r20, 0x01	; 1
+ 27a:	e4 2e       	mov	r14, r20
+ 27c:	f1 2c       	mov	r15, r1
+ 27e:	a2 e0       	ldi	r26, 0x02	; 2
+ 280:	b0 e0       	ldi	r27, 0x00	; 0
+wait();              // wait for 100 ms
+state++;             // increase state
+
+}
+
+if((baby_left_sensor==0b0000000)&(baby_right_sensor==0b0000000)&state==3) //if both sensors "on"
+ 282:	80 e0       	ldi	r24, 0x00	; 0
+ 284:	90 e0       	ldi	r25, 0x00	; 0
+ 286:	a3 30       	cpi	r26, 0x03	; 3
+ 288:	b1 05       	cpc	r27, r1
+ 28a:	11 f4       	brne	.+4      	; 0x290 <main+0x228>
+ 28c:	81 e0       	ldi	r24, 0x01	; 1
+ 28e:	90 e0       	ldi	r25, 0x00	; 0
+ 290:	82 23       	and	r24, r18
+ 292:	93 23       	and	r25, r19
+ 294:	89 2b       	or	r24, r25
+ 296:	61 f0       	breq	.+24     	; 0x2b0 <main+0x248>
+{
+
+PORTD=0b00000000;     //same as previous if loop
+ 298:	12 ba       	out	0x12, r1	; 18
+baby_status=0;
+mother_status=1;
+PORTB=0b00001001;     // move straight
+ 29a:	98 ba       	out	0x18, r9	; 24
+ 29c:	c5 01       	movw	r24, r10
+ 29e:	01 97       	sbiw	r24, 0x01	; 1
+ 2a0:	f1 f7       	brne	.-4      	; 0x29e <main+0x236>
+ 2a2:	cc 24       	eor	r12, r12
+ 2a4:	dd 24       	eor	r13, r13
+ 2a6:	91 e0       	ldi	r25, 0x01	; 1
+ 2a8:	e9 2e       	mov	r14, r25
+ 2aa:	f1 2c       	mov	r15, r1
+ 2ac:	a4 e0       	ldi	r26, 0x04	; 4
+ 2ae:	b0 e0       	ldi	r27, 0x00	; 0
+wait();
+state++;
+
+}
+
+if((baby_left_sensor==0b0000000)&(baby_right_sensor==0b0000000)&state==5) //if both sensors "on"
+ 2b0:	80 e0       	ldi	r24, 0x00	; 0
+ 2b2:	90 e0       	ldi	r25, 0x00	; 0
+ 2b4:	a5 30       	cpi	r26, 0x05	; 5
+ 2b6:	b1 05       	cpc	r27, r1
+ 2b8:	11 f4       	brne	.+4      	; 0x2be <main+0x256>
+ 2ba:	81 e0       	ldi	r24, 0x01	; 1
+ 2bc:	90 e0       	ldi	r25, 0x00	; 0
+ 2be:	82 23       	and	r24, r18
+ 2c0:	93 23       	and	r25, r19
+ 2c2:	89 2b       	or	r24, r25
+ 2c4:	09 f4       	brne	.+2      	; 0x2c8 <main+0x260>
+ 2c6:	f7 ce       	rjmp	.-530    	; 0xb6 <main+0x4e>
+{
+    
+PORTD=0b00000000;    //stop
+ 2c8:	12 ba       	out	0x12, r1	; 18
+baby_status=0;
+mother_status=0;
+PORTB=0b00000000; 
+ 2ca:	18 ba       	out	0x18, r1	; 24
+ 2cc:	c5 01       	movw	r24, r10
+ 2ce:	01 97       	sbiw	r24, 0x01	; 1
+ 2d0:	f1 f7       	brne	.-4      	; 0x2ce <main+0x266>
+ 2d2:	81 e0       	ldi	r24, 0x01	; 1
+ 2d4:	68 2e       	mov	r6, r24
+ 2d6:	71 2c       	mov	r7, r1
+ 2d8:	a6 e0       	ldi	r26, 0x06	; 6
+ 2da:	b0 e0       	ldi	r27, 0x00	; 0
+ 2dc:	ee 24       	eor	r14, r14
+ 2de:	ff 24       	eor	r15, r15
+ 2e0:	e8 ce       	rjmp	.-560    	; 0xb2 <main+0x4a>
+
+000002e2 <_exit>:
+ 2e2:	f8 94       	cli
+
+000002e4 <__stop_program>:
+ 2e4:	ff cf       	rjmp	.-2      	; 0x2e4 <__stop_program>

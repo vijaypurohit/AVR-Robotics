@@ -1,0 +1,336 @@
+
+obstacle_avoider_atmega8_mini.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000124  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .debug_aranges 00000020  00000000  00000000  00000178  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  2 .debug_pubnames 0000001b  00000000  00000000  00000198  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  3 .debug_info   00000299  00000000  00000000  000001b3  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_abbrev 00000104  00000000  00000000  0000044c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_line   0000026e  00000000  00000000  00000550  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_frame  00000020  00000000  00000000  000007c0  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_str    000000fa  00000000  00000000  000007e0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_loc    00000258  00000000  00000000  000008da  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_ranges 00000048  00000000  00000000  00000b32  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	12 c0       	rjmp	.+36     	; 0x26 <__ctors_end>
+   2:	2c c0       	rjmp	.+88     	; 0x5c <__bad_interrupt>
+   4:	2b c0       	rjmp	.+86     	; 0x5c <__bad_interrupt>
+   6:	2a c0       	rjmp	.+84     	; 0x5c <__bad_interrupt>
+   8:	29 c0       	rjmp	.+82     	; 0x5c <__bad_interrupt>
+   a:	28 c0       	rjmp	.+80     	; 0x5c <__bad_interrupt>
+   c:	27 c0       	rjmp	.+78     	; 0x5c <__bad_interrupt>
+   e:	26 c0       	rjmp	.+76     	; 0x5c <__bad_interrupt>
+  10:	25 c0       	rjmp	.+74     	; 0x5c <__bad_interrupt>
+  12:	24 c0       	rjmp	.+72     	; 0x5c <__bad_interrupt>
+  14:	23 c0       	rjmp	.+70     	; 0x5c <__bad_interrupt>
+  16:	22 c0       	rjmp	.+68     	; 0x5c <__bad_interrupt>
+  18:	21 c0       	rjmp	.+66     	; 0x5c <__bad_interrupt>
+  1a:	20 c0       	rjmp	.+64     	; 0x5c <__bad_interrupt>
+  1c:	1f c0       	rjmp	.+62     	; 0x5c <__bad_interrupt>
+  1e:	1e c0       	rjmp	.+60     	; 0x5c <__bad_interrupt>
+  20:	1d c0       	rjmp	.+58     	; 0x5c <__bad_interrupt>
+  22:	1c c0       	rjmp	.+56     	; 0x5c <__bad_interrupt>
+  24:	1b c0       	rjmp	.+54     	; 0x5c <__bad_interrupt>
+
+00000026 <__ctors_end>:
+  26:	11 24       	eor	r1, r1
+  28:	1f be       	out	0x3f, r1	; 63
+  2a:	cf e5       	ldi	r28, 0x5F	; 95
+  2c:	d4 e0       	ldi	r29, 0x04	; 4
+  2e:	de bf       	out	0x3e, r29	; 62
+  30:	cd bf       	out	0x3d, r28	; 61
+
+00000032 <__do_copy_data>:
+  32:	10 e0       	ldi	r17, 0x00	; 0
+  34:	a0 e6       	ldi	r26, 0x60	; 96
+  36:	b0 e0       	ldi	r27, 0x00	; 0
+  38:	e4 e2       	ldi	r30, 0x24	; 36
+  3a:	f1 e0       	ldi	r31, 0x01	; 1
+  3c:	02 c0       	rjmp	.+4      	; 0x42 <.do_copy_data_start>
+
+0000003e <.do_copy_data_loop>:
+  3e:	05 90       	lpm	r0, Z+
+  40:	0d 92       	st	X+, r0
+
+00000042 <.do_copy_data_start>:
+  42:	a0 36       	cpi	r26, 0x60	; 96
+  44:	b1 07       	cpc	r27, r17
+  46:	d9 f7       	brne	.-10     	; 0x3e <.do_copy_data_loop>
+
+00000048 <__do_clear_bss>:
+  48:	10 e0       	ldi	r17, 0x00	; 0
+  4a:	a0 e6       	ldi	r26, 0x60	; 96
+  4c:	b0 e0       	ldi	r27, 0x00	; 0
+  4e:	01 c0       	rjmp	.+2      	; 0x52 <.do_clear_bss_start>
+
+00000050 <.do_clear_bss_loop>:
+  50:	1d 92       	st	X+, r1
+
+00000052 <.do_clear_bss_start>:
+  52:	a0 36       	cpi	r26, 0x60	; 96
+  54:	b1 07       	cpc	r27, r17
+  56:	e1 f7       	brne	.-8      	; 0x50 <.do_clear_bss_loop>
+  58:	02 d0       	rcall	.+4      	; 0x5e <main>
+  5a:	62 c0       	rjmp	.+196    	; 0x120 <_exit>
+
+0000005c <__bad_interrupt>:
+  5c:	d1 cf       	rjmp	.-94     	; 0x0 <__vectors>
+
+0000005e <main>:
+#include<avr/io.h>
+#include<util/delay.h>
+
+
+void main()
+{
+  5e:	0f 93       	push	r16
+  60:	1f 93       	push	r17
+	DDRC=0b0000000;     //set PORTC as input port
+  62:	14 ba       	out	0x14, r1	; 20
+	DDRB=0b00011110;    //PB1, PB2, PB3, PB4 as output port
+  64:	8e e1       	ldi	r24, 0x1E	; 30
+  66:	87 bb       	out	0x17, r24	; 23
+	ls=(PINC&0b0000001);   //acquire only left sensor status connected at PC0
+	rs=(PINC&0b0001000);   // acquire only right sensor status connected at PC3
+		
+	if((ls==0b0000001)&(rs==0b0001000)) //check sensor status for both sensor ON
+		{
+			PORTB=0b00001100;    //move back
+  68:	ac e0       	ldi	r26, 0x0C	; 12
+    milliseconds can be achieved.
+ */
+void
+_delay_loop_2(uint16_t __count)
+{
+	__asm__ volatile (
+  6a:	68 ec       	ldi	r22, 0xC8	; 200
+  6c:	70 e0       	ldi	r23, 0x00	; 0
+			_delay_ms(700);      //keep on moving back for 0.7 sec
+			PORTB=0b00010000;    //move right
+  6e:	b0 e1       	ldi	r27, 0x10	; 16
+			ls=0;               //set sensor status OFF
+			rs=0;               //set sensor status OFF
+		}
+        if((ls==0b0000000)&(rs==0b0000000)) //check sensor status for both sensor OFF
+		{
+			PORTB=0b00010010;  //move forward
+  70:	02 e1       	ldi	r16, 0x12	; 18
+		if((ls==0b0000000)&(rs==0b0001000)) //check sensor status for left sensor=OFF and right sensor=ON
+		                                  
+		{
+			PORTB=0b00001100;   //move back
+			_delay_ms(700);     //keep on moving back for 0.7 sec 
+			PORTB=0b00000010;   //turn left
+  72:	12 e0       	ldi	r17, 0x02	; 2
+	DDRB=0b00011110;    //PB1, PB2, PB3, PB4 as output port
+    int ls=0, rs=0;     // define & initialize ls, rs integer as 0 to acquire the left sensor status in ls and right sensor status in rs
+
+	while(1)            // create infinite loop
+	{
+	ls=(PINC&0b0000001);   //acquire only left sensor status connected at PC0
+  74:	83 b3       	in	r24, 0x13	; 19
+  76:	90 e0       	ldi	r25, 0x00	; 0
+	rs=(PINC&0b0001000);   // acquire only right sensor status connected at PC3
+  78:	23 b3       	in	r18, 0x13	; 19
+  7a:	30 e0       	ldi	r19, 0x00	; 0
+  7c:	28 70       	andi	r18, 0x08	; 8
+  7e:	30 70       	andi	r19, 0x00	; 0
+		
+	if((ls==0b0000001)&(rs==0b0001000)) //check sensor status for both sensor ON
+  80:	ac 01       	movw	r20, r24
+  82:	41 70       	andi	r20, 0x01	; 1
+  84:	50 70       	andi	r21, 0x00	; 0
+  86:	80 ff       	sbrs	r24, 0
+  88:	17 c0       	rjmp	.+46     	; 0xb8 <main+0x5a>
+  8a:	28 30       	cpi	r18, 0x08	; 8
+  8c:	31 05       	cpc	r19, r1
+  8e:	a1 f4       	brne	.+40     	; 0xb8 <main+0x5a>
+		{
+			PORTB=0b00001100;    //move back
+  90:	a8 bb       	out	0x18, r26	; 24
+  92:	88 e5       	ldi	r24, 0x58	; 88
+  94:	9b e1       	ldi	r25, 0x1B	; 27
+  96:	fb 01       	movw	r30, r22
+  98:	31 97       	sbiw	r30, 0x01	; 1
+  9a:	f1 f7       	brne	.-4      	; 0x98 <main+0x3a>
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+  9c:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+  9e:	d9 f7       	brne	.-10     	; 0x96 <main+0x38>
+			_delay_ms(700);      //keep on moving back for 0.7 sec
+			PORTB=0b00010000;    //move right
+  a0:	b8 bb       	out	0x18, r27	; 24
+  a2:	80 e4       	ldi	r24, 0x40	; 64
+  a4:	9f e1       	ldi	r25, 0x1F	; 31
+  a6:	fb 01       	movw	r30, r22
+  a8:	31 97       	sbiw	r30, 0x01	; 1
+  aa:	f1 f7       	brne	.-4      	; 0xa8 <main+0x4a>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+  ac:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+  ae:	d9 f7       	brne	.-10     	; 0xa6 <main+0x48>
+  b0:	40 e0       	ldi	r20, 0x00	; 0
+  b2:	50 e0       	ldi	r21, 0x00	; 0
+  b4:	20 e0       	ldi	r18, 0x00	; 0
+  b6:	30 e0       	ldi	r19, 0x00	; 0
+			_delay_ms(800);      //keep on turning right for 0.8 sec
+			ls=0;                //set sensor status OFF
+			rs=0;                //set sensor status OFF
+		}
+
+		if((ls==0b0000001)&(rs==0b0000000))  //check sensor status for left sensor=ON and right sensor=OFF
+  b8:	41 30       	cpi	r20, 0x01	; 1
+  ba:	51 05       	cpc	r21, r1
+  bc:	a9 f4       	brne	.+42     	; 0xe8 <main+0x8a>
+  be:	23 2b       	or	r18, r19
+  c0:	c9 f6       	brne	.-78     	; 0x74 <main+0x16>
+		                                     
+		{
+			PORTB=0b00001100;    //move back
+  c2:	a8 bb       	out	0x18, r26	; 24
+  c4:	88 e5       	ldi	r24, 0x58	; 88
+  c6:	9b e1       	ldi	r25, 0x1B	; 27
+  c8:	fb 01       	movw	r30, r22
+  ca:	31 97       	sbiw	r30, 0x01	; 1
+  cc:	f1 f7       	brne	.-4      	; 0xca <main+0x6c>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+  ce:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+  d0:	d9 f7       	brne	.-10     	; 0xc8 <main+0x6a>
+			_delay_ms(700);      //keep on moving back for 0.7 sec
+			PORTB=0b00010000;    //turn right
+  d2:	b8 bb       	out	0x18, r27	; 24
+  d4:	80 e4       	ldi	r24, 0x40	; 64
+  d6:	9f e1       	ldi	r25, 0x1F	; 31
+  d8:	fb 01       	movw	r30, r22
+  da:	31 97       	sbiw	r30, 0x01	; 1
+  dc:	f1 f7       	brne	.-4      	; 0xda <main+0x7c>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+  de:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+  e0:	d9 f7       	brne	.-10     	; 0xd8 <main+0x7a>
+  e2:	20 e0       	ldi	r18, 0x00	; 0
+  e4:	30 e0       	ldi	r19, 0x00	; 0
+  e6:	03 c0       	rjmp	.+6      	; 0xee <main+0x90>
+			_delay_ms(800);      //keep on turning right for 0.8 sec
+			ls=0;                //set sensor status OFF
+			rs=0;                //set sensor status OFF
+		}
+		
+		if((ls==0b0000000)&(rs==0b0001000)) //check sensor status for left sensor=OFF and right sensor=ON
+  e8:	45 2b       	or	r20, r21
+  ea:	09 f0       	breq	.+2      	; 0xee <main+0x90>
+  ec:	c3 cf       	rjmp	.-122    	; 0x74 <main+0x16>
+  ee:	28 30       	cpi	r18, 0x08	; 8
+  f0:	31 05       	cpc	r19, r1
+  f2:	89 f4       	brne	.+34     	; 0x116 <main+0xb8>
+		                                  
+		{
+			PORTB=0b00001100;   //move back
+  f4:	a8 bb       	out	0x18, r26	; 24
+  f6:	88 e5       	ldi	r24, 0x58	; 88
+  f8:	9b e1       	ldi	r25, 0x1B	; 27
+  fa:	fb 01       	movw	r30, r22
+  fc:	31 97       	sbiw	r30, 0x01	; 1
+  fe:	f1 f7       	brne	.-4      	; 0xfc <main+0x9e>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+ 100:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+ 102:	d9 f7       	brne	.-10     	; 0xfa <main+0x9c>
+			_delay_ms(700);     //keep on moving back for 0.7 sec 
+			PORTB=0b00000010;   //turn left
+ 104:	18 bb       	out	0x18, r17	; 24
+ 106:	80 e4       	ldi	r24, 0x40	; 64
+ 108:	9f e1       	ldi	r25, 0x1F	; 31
+ 10a:	fb 01       	movw	r30, r22
+ 10c:	31 97       	sbiw	r30, 0x01	; 1
+ 10e:	f1 f7       	brne	.-4      	; 0x10c <main+0xae>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+ 110:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+ 112:	d9 f7       	brne	.-10     	; 0x10a <main+0xac>
+ 114:	03 c0       	rjmp	.+6      	; 0x11c <main+0xbe>
+			_delay_ms(800);     //keep on turning left for 0.8 sec
+			
+			ls=0;               //set sensor status OFF
+			rs=0;               //set sensor status OFF
+		}
+        if((ls==0b0000000)&(rs==0b0000000)) //check sensor status for both sensor OFF
+ 116:	23 2b       	or	r18, r19
+ 118:	09 f0       	breq	.+2      	; 0x11c <main+0xbe>
+ 11a:	ac cf       	rjmp	.-168    	; 0x74 <main+0x16>
+		{
+			PORTB=0b00010010;  //move forward
+ 11c:	08 bb       	out	0x18, r16	; 24
+ 11e:	aa cf       	rjmp	.-172    	; 0x74 <main+0x16>
+
+00000120 <_exit>:
+ 120:	f8 94       	cli
+
+00000122 <__stop_program>:
+ 122:	ff cf       	rjmp	.-2      	; 0x122 <__stop_program>

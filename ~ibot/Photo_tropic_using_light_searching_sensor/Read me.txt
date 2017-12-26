@@ -1,0 +1,77 @@
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+ABOUT THE CODE
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Using the code you will be accessing General purpose Input Output  and advanced property of AVR Microcontroller. This code is a Pre-Compiled Code written in
+Embedded C language using AVRStudio 3 or 4 IDE that uses WinAVR to access the AVR library files.
+Finally .HEX file is generated after successful compailation of the code.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+WHAT DOES THIS CODE DO???
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+This code is based on prefabricated connections on the board. The Project Photo Tropic robot is using single light searching sensor module to detect light 
+nearby using photo diodes. The light searching sensor module gives single bit of digital data that is being utilised as input in this code.
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+HARDWARE REQUIREMENT
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1.  Robosapiens Development Board.
+2.  ATmega8 with inbuilt Robosapiens BootLoader.  
+3.  USB Cable 
+4.  sound sensor module.
+5.  DC Geared Motor.
+ 
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+HARDWARE ASSEMBLING
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Assemble the Robot using the respective Assembling PDF.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+CONNECTIONS
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1. Connect your light searching sensor module to the board using on board Add on shield provided. light searching sensor module is connected on PB0 to the 
+   controller.
+2. Connect your Right and Left Motor with the respective interface given on board. If the motors are moving in Reverse Direction the then flip the polarity 
+   or reverse the coonnection.
+3. Connect the Robosapiens Control Circuit to the PC / Laptop using USB Cable flash the Controller.
+ 
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+FLASHING INSTRUCTIONS
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1.  Download the project ZIP file and HIDBOOTFLASH.
+2.  Extract the Zip file.
+3.  Connect the Robosapiens Control Circuit to the PC / Laptop using USB Cable.
+4.  Open HIDBOOTFLASH.
+5.  Click on Find Device and make sure the Robosapiens R-Board is detected, if not then check the connections.
+6.  Select Reboot AVR option.
+7.  Select the .HEX file from the extracted project file by clicking on the Browse Button.
+8.  Click on WRITE button to flash your device.  
+9.  After flashing if you again want to flash the device then press reset button on board to select booting mode.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+PRECAUTIONS
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1. While connecting your Power Supply with the Control Circuit, make sure that the red wire is connected to the Positive Terminal of the PBT Connector and
+   the Black wire to the Negative Terminal and the power LED is glowing.
+2. Make sure the ICs have been biased properly.
+3. While Connecting the peripherals make sure that biasing is done correctly.
+4. If you have connected any INDUCTION DEVICE, DO NOT OPERATE IT MANUALLY.
+5. Do not Short Vcc and Gnd on the Control Circuit. 
+6. The modules which are been provided are fabricated sophistically, So Handle Carefully.
+7. If you are installing AVRStudio and WINAVR make sure everything goes ByDefault.
+8. While flashing the device make sure you have chosen the .Hex file.
+9. Before programming make sure to press the reset button every time before you flash.
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+**NOTE : If you need to customise the code you need to install AVRStudio 3 or 4 and WINAVR. In case the code does not show desired output on Hardware, you
+         can use debugging option available in AVRStudio IDE.
+------------------------------------------------------------------------------------------------------------------------------------------------------------
